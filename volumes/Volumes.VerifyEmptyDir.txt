@@ -1,0 +1,19 @@
+# Get the pod names
+oc get pods
+
+# Start a shell
+oc rsh <pod name from output>
+
+# Check for /empty-dir-demo
+ls /
+
+# Check contents of /empty-dir-demo
+ls /empty-dir-demo
+
+# Add a file 
+echo "Test file contents" > /empty-dir-demo/test-file.txt
+
+# Check that the file was created successfully
+ls /empty-dir-demo
+
+

@@ -1,0 +1,5 @@
+# Same --from-file but with a directory
+oc create configmap pods-example --from-file pods
+
+# Verify
+oc get -o yaml configmap/pods-example

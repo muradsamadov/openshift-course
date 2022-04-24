@@ -1,0 +1,6 @@
+# Inside the pod, get all environment variables
+env
+
+# Use the environment variables with wget
+wget -qO- $HELLO_WORLD_POD_PORT_8080_TCP_ADDR:$HELLO_WORLD_POD_PORT_8080_TCP_PORT
+

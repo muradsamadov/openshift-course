@@ -1,0 +1,14 @@
+# First, delete the old ImageStream
+oc delete is/hello-world
+
+# Create the ImageStream (but don't deploy yet)
+oc import-image --confirm quay.io/practicalopenshift/hello-world
+
+# List ImageStreams
+oc get is
+
+# List tags
+oc get istag
+
+# Deploy an application based on your new ImageStream
+oc new-app myproject/hello-world

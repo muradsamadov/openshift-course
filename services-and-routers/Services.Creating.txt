@@ -1,0 +1,22 @@
+# Create a pod based on a file (just like the Pods section)
+oc create -f pods/pod.yaml
+
+# Create a service for the pod
+oc expose --port 8080 pod/hello-world-pod
+
+# Check that the service and pod are connected properly
+oc status
+
+# Create another pod
+oc create -f pods/pod2.yaml
+
+# Shell into the second pod
+oc rsh hello-world-pod-2
+
+# Get the service IP and Port
+oc status
+
+# In the shell, you can make a request to the service (because you are inside the OpenShift cluster)
+wget -qO- <service IP / Port>
+
+

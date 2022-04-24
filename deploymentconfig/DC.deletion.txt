@@ -1,0 +1,14 @@
+# Check status
+oc status
+
+# oc get works with different types of resources
+oc get svc
+oc get dc
+oc get istag
+
+# oc delete also works with different types of resources
+oc delete svc/hello-world
+oc delete dc/hello-world
+oc delete istag/hello-world
+
+

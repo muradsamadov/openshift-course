@@ -1,0 +1,17 @@
+# oc tag syntax
+oc tag <original> <destination>
+
+# Example
+oc tag quay.io/image-name:tag image-name:tag
+
+# This lesson
+oc tag quay.io/practicalopenshift/hello-world:update-message hello-world:update-message
+
+# Check your ImageStreams
+oc get is
+
+# Check your ImageStreamTags
+oc get istag
+
+
+

@@ -1,0 +1,8 @@
+# Get details on the pod's spec
+oc explain pod.spec
+
+# Get details on the pod's containers
+oc explain pod.spec.containers
+
+# You can use this oc explain command to get info about any of the other fields in a Pod
+

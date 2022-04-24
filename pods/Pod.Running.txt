@@ -1,0 +1,9 @@
+# Check that OpenShift is running 
+# You can use minishift start if the cluster has stopped
+oc status
+
+# Create a Pod on OpenShift based on a file
+oc create -f pods/pod.yaml
+
+# Show all currently running Pods
+oc get pods

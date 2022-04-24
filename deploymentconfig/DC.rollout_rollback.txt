@@ -1,0 +1,9 @@
+
+# Setting up
+oc get pods --watch
+
+# Roll out the latest version of the application
+oc rollout latest dc/hello-world
+
+# Roll back to the previous version of the application
+oc rollback dc/hello-world

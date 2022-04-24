@@ -1,0 +1,20 @@
+# Deploy the Hello World app and expose it
+oc new-app quay.io/practicalopenshift/hello-world
+oc expose svc/hello-world
+
+# Get the route URL
+oc status
+
+# First check
+curl <url from route>
+
+# Set environment variables
+oc set env dc/hello-world --from cm/message-map
+
+# Second check
+curl <url from route>
+
+# Get the YAML
+oc get -o yaml dc/hello-world
+
+

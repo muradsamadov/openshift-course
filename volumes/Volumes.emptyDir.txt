@@ -1,0 +1,19 @@
+# Create a new project for the volumes section
+oc new-project volumes
+
+# Deploy the basic app
+oc new-app quay.io/practicalopenshift/hello-world
+
+# Add an emptyDir volume
+oc set volume dc/hello-world \
+  --add \
+  --type emptyDir \
+  --mount-path /empty-dir-demo
+
+# Check the definition
+oc get -o yaml dc/hello-world
+
+# 
+
+
+

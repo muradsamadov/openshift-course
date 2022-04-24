@@ -1,0 +1,8 @@
+# Delete an OpenShift resource
+oc delete <resource type> <resource name>
+
+# Delete the pod for this lesson
+oc delete pod hello-world-pod
+
+# Check that it's deleted
+oc get pod

@@ -1,0 +1,14 @@
+# Get the pod name
+oc get pod
+
+# Start the shell
+oc rsh <pod name>
+
+# Check for /cm-directory
+ls /
+
+# Check inside /cm-directory
+ls /cm-directory
+
+# Check the file contents
+cat /cm-directory/file.txt

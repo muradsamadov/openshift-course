@@ -1,0 +1,9 @@
+# Standard image deployment 
+oc new-app quay.io/practicalopenshift/hello-world
+
+# Describe the DC to get its labels
+oc describe dc/hello-world
+
+# Delete all application resources using labels
+oc delete all -l app=hello-world
+

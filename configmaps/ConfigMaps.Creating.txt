@@ -1,0 +1,2 @@
+# Create a configmap using literal command line arguments
+oc create configmap message-map --from-literal MESSAGE="Hello From ConfigMap"

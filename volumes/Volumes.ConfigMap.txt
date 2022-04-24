@@ -1,0 +1,12 @@
+# Create the configmap to use as a Volume
+oc create configmap cm-volume \
+  --from-literal file.txt="ConfigMap file contents"
+
+# Mount the ConfigMap
+oc set volume dc/hello-world \
+  --add \
+  --configmap-name cm-volume \
+  --mount-path /cm-directory
+
+# Check updates to the DeploymentConfig
+oc get -o yaml dc/hello-world

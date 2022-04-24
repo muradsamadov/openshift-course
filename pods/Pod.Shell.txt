@@ -1,0 +1,10 @@
+# oc rsh will work with any Pod name 
+# We used "hello-world-pod" in this lesson.
+oc rsh <pod name>
+
+# Check the API on port 8080
+wget localhost:8080
+
+# Exit the rsh session
+exit
+

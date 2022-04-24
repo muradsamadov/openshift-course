@@ -1,0 +1,37 @@
+# Mount an emptyDir volume
+
+# Main syntax
+oc set volume dc/<dc name> --add --type emptyDir --mount-path <path inside container>
+
+# Example:Add an emptyDir volume
+oc set volume dc/hello-world \
+  --add \
+  --type emptyDir \
+  --mount-path /empty-dir-demo
+
+
+# Mount ConfigMaps as volumes
+
+# Main command
+oc set volume <DC name> --add --configmap-name <configmap name> --mount-path <path inside container>
+
+# Example: Create the configmap to use as a Volume
+oc create configmap cm-volume \
+  --from-literal file.txt="ConfigMap file contents"
+
+# Example: Mount the ConfigMap
+oc set volume dc/hello-world \
+  --add \
+  --configmap-name cm-volume \
+  --mount-path /cm-directory
+
+
+# Using other Volume Suppliers
+# There are a wide variety of suppliers
+# oc explain and the online documentation are both very helpful
+
+# The official Kubernetes Documentation for Volumes
+https://kubernetes.io/docs/concepts/storage/volumes/
+
+# Check out the built-in documentation
+oc explain persistentvolume.spec

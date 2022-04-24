@@ -1,0 +1,20 @@
+# Remote Tag syntax
+<host name>/<your username>/<image name>
+
+# Load environment variables from credentials.env
+source credentials.env
+
+# Building an image with a remote tag
+docker build -t quay.io/$REGISTRY_USERNAME/private-repo .
+
+# Log into a registry
+docker login <hostname>
+
+# Log into quay.io
+docker login quay.io
+
+# Push (send) an image to a remote registry
+docker push <remote tag>
+
+# Push the image to Quay
+docker push quay.io/$REGISTRY_USERNAME/private-repo

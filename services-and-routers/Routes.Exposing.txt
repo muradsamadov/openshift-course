@@ -1,0 +1,10 @@
+# Create a Route based on a Service
+oc expose svc/hello-world
+
+# Get the Route URL
+oc status
+
+# Check the route
+curl <route from oc status>
+
+

@@ -1,0 +1,81 @@
+# Create ImageStreams
+
+# Create the ImageStream (but don't deploy yet)
+oc import-image --confirm <image tag>
+
+# Example with this course's image
+oc import-image --confirm quay.io/practicalopenshift/hello-world
+
+# Importing any new images
+oc import-image --confirm quay.io/practicalopenshift/hello-world
+
+
+# Importing extra ImageStreamTags for an existing ImageStream
+
+# oc tag syntax
+oc tag <original> <destination>
+
+# Example
+oc tag quay.io/image-name:tag image-name:tag
+
+
+# Check the current ImageStreams and ImageStreamTags
+
+# List ImageStreams
+oc get is
+
+# List tags
+oc get istag
+
+
+# Use the ImageStream with oc new-app
+
+# Deploy an application based on your new ImageStream
+oc new-app myproject/hello-world
+
+
+# Creating and pushing a private image
+# These require signing up for a Quay.io account and pushing a private image
+
+# Remote Tag syntax
+<host name>/<your username>/<image name>
+
+# Building an image with a remote tag
+docker build -t quay.io/$REGISTRY_USERNAME/private-repo .
+
+# Log into a registry
+docker login <hostname>
+
+# Log into quay.io
+docker login quay.io
+
+# Push (send) an image to a remote registry
+docker push <remote tag>
+
+# Push the image to Quay
+docker push quay.io/$REGISTRY_USERNAME/private-repo
+
+
+# Use Private images with OpenShift
+
+# You may need to run this command 
+source credentials.env
+
+# Create a Docker registry secret
+oc create secret docker-registry \
+  <secret name> \
+  --docker-server=$REGISTRY_HOST \
+  --docker-username=$REGISTRY_USERNAME \
+  --docker-password=$REGISTRY_PASSWORD \
+  --docker-email=$REGISTRY_EMAIL
+
+# A touch of secrets magic
+# This command links the secret to the service account named "default"
+oc secrets link default <secret name> --for=pull
+
+# Check that the service account has the secret associated
+oc describe serviceaccount/default
+
+# Once authentication is set up, start the application 
+oc new-app quay.io/$REGISTRY_USERNAME/private-repo
+

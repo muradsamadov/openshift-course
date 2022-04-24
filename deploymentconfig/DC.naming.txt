@@ -1,0 +1,8 @@
+# Set the name using the --name flag
+oc new-app <image tag> --name <desired name>
+
+# In this lesson
+oc new-app quay.io/practicalopenshift/hello-world --name demo-app
+
+# The specifier will match your desired name (dc/demo-app in this case)
+oc describe dc/demo-app

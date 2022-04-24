@@ -1,0 +1,5 @@
+# The official Kubernetes Documentation for Volumes
+https://kubernetes.io/docs/concepts/storage/volumes/
+
+# Check out the built-in documentation
+oc explain persistentvolume.spec
