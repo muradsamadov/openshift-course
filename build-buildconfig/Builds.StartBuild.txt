@@ -1,0 +1,10 @@
+# Start a build for an existing BuildConfig
+oc start-build bc/hello-world
+
+# Watch the pods
+oc get pods --watch
+
+# Builds result in an update to an ImageStream
+oc describe is/hello-world
+
+

@@ -1,0 +1,12 @@
+# See all of your pods
+oc get pods
+
+# Get logs for a single build
+oc logs -f build/hello-world-1
+
+# Get logs for the latest build for a BuildConfig
+# This is the best way (usually)
+oc logs -f bc/hello-world
+
+
+
