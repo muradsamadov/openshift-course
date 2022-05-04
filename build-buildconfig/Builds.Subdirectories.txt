@@ -1,0 +1,5 @@
+# Use --context-dir to build from a subdirectory
+oc new-build https://gitlab.com/practical-openshift/labs.git --context-dir hello-world
+
+# Check out the logs
+oc logs bc/labs

@@ -1,0 +1,15 @@
+# Build the s2i/ruby directory of the labs project
+oc new-app https://gitlab.com/practical-openshift/labs.git \
+  --context-dir s2i/ruby
+
+# Get the logs
+oc logs -f bc/labs
+
+# Check the running pods
+oc get pods
+
+# Expose and check
+oc expose svc/labs
+oc get route
+
+

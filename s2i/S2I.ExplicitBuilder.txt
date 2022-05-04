@@ -1,0 +1,16 @@
+# Clear out the project
+oc delete all --all
+
+# Deploy with the ruby image explicitly declared
+oc new-app \
+  ruby~https://gitlab.com/practical-openshift/labs.git \
+  --context-dir s2i/ruby
+
+# Running with an incorrect builder image
+oc new-app \
+  python~https://gitlab.com/practical-openshift/labs.git \
+  --context-dir s2i/ruby
+
+
+
+

@@ -1,0 +1,29 @@
+# Use S2I in a build
+# The syntax is the same as normal Builds. OpenShift uses S2I when there is no Dockerfile
+
+# oc new-app works with S2I 
+oc new-app <Git URL with no Dockerfile>
+
+# oc new-build works with S2I 
+oc new-build <Git URL with no Dockerfile>
+
+# Example: build the s2i/ruby directory of the labs project
+oc new-app https://gitlab.com/practical-openshift/labs.git \
+  --context-dir s2i/ruby
+
+
+# Specifying a builder image
+oc new-app builder-image~<Git URL>
+
+# Example: Deploy with the ruby image explicitly declared
+oc new-app \
+  ruby~https://gitlab.com/practical-openshift/labs.git \
+  --context-dir s2i/ruby
+
+
+# Overriding S2I Scripts
+# Assemble and Run are the two main scripts
+# Overrides go in your source at .s2i/bin/assemble or .s2i/bin/run
+# They need to call the original scripts, which are usually at /usr/libexec/s2i/assemble or /usr/libexec/s2i/run
+
+
