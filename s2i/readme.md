@@ -20,3 +20,44 @@ Bele bir halda ola bilerki yuxaridaki kimi repo ola biler orada yalniz kod ola b
 # oc new-app --name mydeployment-2 php~https://github.com/muradsamadov/php-project-2.git --as-deployment-config
 ```
 Bu halda 'php~' bu sekilde qeyd etmekle applicationu deploy etmek olur.
+
+# s2i scripts
+Bele basa dusdum ki, repodan build edende burada .s2i/bin direktoriyasinda 'assemble' adinda fayl olur ki, bu fayli container daxilinde bash script kimi calisdirir. Bu halda kod olan repoda mutleq elave olaraq .s2i/bin/assemble fayli olmalidir.
+Elave olaraq qeyd edim ki, .s2i/bin/assemble faylinda yazilma ardicilligi var:
+```
+# cat .s2i/bin/assemble
+#!/bin/sh
+
+echo Hello from before assemble script 
+
+# Call the original script
+/usr/libexec/s2i/assemble
+
+echo Hello from after assemble script
+
+touch /opt/app-root/src/myfile.php
+echo 'salam' > /opt/app-root/src/myfile.php
+```
+Yuxaridaki faylda asagidaki hisseye kimi default olaraq yazilmalidir:
+```
+#!/bin/sh
+
+echo Hello from before assemble script 
+
+# Call the original script
+/usr/libexec/s2i/assemble
+
+echo Hello from after assemble script
+```
+gorunduyu kimi ilk nobede bu skript ise dusmelidir '/usr/libexec/s2i/assemble', cunki bunun vasitesile ilk novbede kod deploy olur sonra ise hemin kontainerde dediyimiz kimi bunun ardi olaraq diger yazdigimiz skript calisir:
+```
+touch /opt/app-root/src/myfile.php
+echo 'salam' > /opt/app-root/src/myfile.php
+```
+Bu vasitesile kod oldugu kimi deploy olur ve ayri olaraq '/opt/app-root/src/myfile.php' faylinda bu fayl yaranmis olur.
+Eger bu asagidakini assemble faylinda yazmayib sadece bunu yazsaq:
+```
+touch /opt/app-root/src/myfile.php
+echo 'salam' > /opt/app-root/src/myfile.php
+```
+bu halda ise kontainer daxilinde hecbir kod yaranmir yalniz burada qeyd olunan 'touch /opt/app-root/src/myfile.php' fayl yaranacaqdir, cunki burada bu skript icra olunmayib '/usr/libexec/s2i/assemble'
