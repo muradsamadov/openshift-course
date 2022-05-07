@@ -1,0 +1,12 @@
+# Set the probe incorrectly
+oc set probe dc/hello-world \
+  --liveness \
+  --open-tcp=8081
+
+# Watch pods
+oc get pods --watch
+
+# Set the probe to the correct port
+oc set probe dc/hello-world \
+  --liveness \
+  --open-tcp=8081

@@ -1,0 +1,19 @@
+# Create a new project for the Advanced DC section
+oc new-project advanced-dc
+
+# Deploy the Hello World image
+oc new-app quay.io/practicalopenshift/hello-world
+
+# Use oc describe on the DeploymentConfig
+oc describe dc/hello-world
+
+# Start watching pods
+oc get pods --watch
+
+# Set a volume in order to trigger a rollout
+oc set volume dc/hello-world \
+  --add \
+  --type emptyDir \
+  --mount-path /config-change-demo
+
+

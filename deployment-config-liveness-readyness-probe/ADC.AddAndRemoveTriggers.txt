@@ -1,0 +1,13 @@
+# List triggers
+oc set triggers dc/hello-world
+
+# Remove the ConfigChange trigger
+oc set triggers dc/hello-world \
+  --remove
+  --from-config
+
+# Re-add the ConfigChange trigger
+oc set triggers dc/hello-world --from-config
+
+
+

@@ -1,0 +1,71 @@
+# Trigger management
+# Both ImageChange and ConfigChange triggers are enabled by default
+
+# List triggers
+oc set triggers dc/<dc name>
+
+# Remove the ConfigChange trigger
+oc set triggers dc/<dc name> \
+  --remove
+  --from-config
+
+# Re-add the ConfigChange trigger
+oc set triggers dc/<dc name> --from-config
+
+# Remove the ImageChange trigger
+oc set triggers dc/<dc name> \
+  --remove \
+  --from-image <image name>:<tag>
+
+# Re-add the ImageChange trigger
+# You need to pick a container in your pod spec that corresponds to the image in --from-image
+oc set triggers dc/<dc name> \
+  --from-image <image name>:<tag> \
+  -c <container name>
+
+
+# Deployment Hooks
+
+# General syntax
+oc set deployment-hook dc/<dc name> \
+  (--pre, --post, or --mid) \
+  -c <container name to execute hook in>
+  -- <command to execute for the hook>
+
+# Example: Add a simple deployment hook
+oc set deployment-hook dc/hello-world \
+  --pre \
+  -c hello-world \
+  -- /bin/echo Hello from pre-deploy hook
+
+# Check the hook in the DeploymentConfig definition
+oc describe dc/hello-world
+
+
+# Switching to the Recreate Strategy
+# No oc set deployment-strategy as of writing, so you'll need to manually update the resource definition
+
+# Start editing the DeploymentConfig
+oc edit dc/hello-world
+
+# To change to Recreate, switch the spec.strategy to be:
+
+  strategy:
+    type: Recreate
+
+
+# Readiness and Liveness probes
+
+# General syntax
+oc set probe dc/<dc name> (--liveness or --readiness) (--open-tcp, --get-url, or -- for a command)
+
+# Example: Add a liveness probe that opens TCP port 8080 for its test
+oc set probe dc/hello-world --liveness --open-tcp=8080
+
+# Example: Add a readiness probe that requests localhost port 8080 with the path /health/readiness for its test
+oc set probe dc/hello-world --readiness --get-url=http://:8080/health/readiness
+
+# Example: Add a readiness probe that runs "exit 0" inside the container as its test
+oc set probe dc/hello-world --readiness -- exit 0
+
+

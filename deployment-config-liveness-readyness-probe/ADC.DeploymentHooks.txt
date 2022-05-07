@@ -1,0 +1,28 @@
+# Watch the pods
+oc get pods --watch
+
+# Trigger a deployment
+oc rollout latest dc/hello-world
+
+# Add the deployment hook
+oc set deployment-hook dc/hello-world \
+  --pre \
+  -c hello-world \
+  -- /bin/echo Hello from pre-deploy hook
+
+# Check the definition
+oc describe dc/hello-world
+
+# Roll out again to see the changes
+# You should get a hello-world-4-hook-pre pod
+oc rollout latest dc/hello-world
+
+# Check events
+oc get events
+
+
+
+
+
+
+

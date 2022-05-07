@@ -1,0 +1,9 @@
+# Add the probe
+oc set probe dc/hello-world \
+  --liveness \
+  --open-tcp=8080
+
+# Check the definition for updates
+oc describe dc/hello-world
+
+

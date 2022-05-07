@@ -1,0 +1,16 @@
+# Edit it live
+oc edit dc/hello-world
+
+# To change to Recreate, switch the spec.strategy to be:
+
+  strategy:
+    type: Recreate
+
+# Check that the changes saved (search for Strategy)
+oc describe dc/hello-world
+
+# Rollout to test
+oc rollout latest dc/hello-world
+
+
+
