@@ -50,3 +50,10 @@ Commercial support is available at
 </body>
 </html>
 ```
+
+# Debug Openshift
+```
+# oc create deployment nginx --image=quay.io/muradsamadov/nginx
+# oc debug deploy/nginx --as-user=1000630001
+# oc debug deploy/nginx --as-root
+```
